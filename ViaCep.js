@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Text, TextInput } from "react-native-paper";
+import { Text, TextInput, Button } from "react-native-paper";
 
 export default function ViaCep() {
   const [text, setText] = useState('')
+  const [cep, setCep] = useState('')
   
   return (
     <>
@@ -11,7 +12,20 @@ export default function ViaCep() {
         label={'Texto'}
         value={text}
         onChangeText={t => setText(t)} />
-      <Text>{text}</Text>
+      <Button 
+        style={{backgroundColor: '#c934eb', color: '#FFF'}}
+        onPress={async () => {
+          let req = await fetch(`https://viacep.com.br/ws/${text}/json`)
+          console.log(req)
+          let rjs = await req.json()
+          console.log(rjs)
+          setCep(`Você está em: ${rjs['logradouro']}, ${rjs['localidade']} - ${rjs['estado']}`)
+      }}>
+        Consultar
+      </Button>
+      <Text style={{color: '#000'}}>
+        {cep}
+      </Text>
     </>
   )
 }
