@@ -7,13 +7,15 @@ export default function ViaCep() {
   
   return (
     <>
-      <Text variant="displayLarge" style={{color: '#000'}}>ViaCep</Text>
+      <Text variant="displayMedium" style={{color: '#000'}}>ViaCep</Text>
+      <Text style={{color: '#999', textAlign: 'center'}}>Exemplo de requisição <code>fetch()</code> utilizando a API ViaCep</Text>
       <TextInput 
-        label={'Texto'}
+        mode='outlined'
+        label={'Digite seu CEP'}
         value={text}
         onChangeText={t => setText(t)} />
       <Button 
-        style={{backgroundColor: '#c934eb', color: '#FFF'}}
+        mode='contained'
         onPress={async () => {
           let req = await fetch(`https://viacep.com.br/ws/${text}/json`)
           console.log(req)
@@ -21,9 +23,9 @@ export default function ViaCep() {
           console.log(rjs)
           setCep(`Você está em: ${rjs['logradouro']}, ${rjs['localidade']} - ${rjs['estado']}`)
       }}>
-        Consultar
+        Consultar o endereço
       </Button>
-      <Text style={{color: '#000'}}>
+      <Text style={{color: '#000', textAlign: 'center'}}>
         {cep}
       </Text>
     </>

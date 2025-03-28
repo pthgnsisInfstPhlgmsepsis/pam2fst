@@ -1,16 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { PaperProvider } from 'react-native-paper'
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import ViaCep from './ViaCep';
 
 export default function App() {
   return (
-    <PaperProvider>
+    <>
       <View style={styles.container}>
         <ViaCep />
         <StatusBar style="auto" />
       </View>
-    </PaperProvider>
+    </>
   );
 }
 
@@ -19,6 +18,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: '1em',
+    margin: '2em'
   },
   miku: {
     fontSize: '2em',
