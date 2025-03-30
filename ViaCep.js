@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, TextInput, Button } from "react-native-paper";
+import { Text, TextInput, Button, Portal, Modal, View } from "react-native-paper";
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
 })
 
 export default function ViaCep() {
+  const [modalVisible, setVisibile] = useState(false)
+  const showModal = () => setVisibile(true)
+  const hideModal = () => setVisibile(false)
+
   const [text, setText] = useState('') // texto do nome
   const [email, setEmail] = useState('') // texto do email 
 
@@ -101,19 +105,39 @@ export default function ViaCep() {
         mode='contained'
         style={{width: '30%', borderRadius: '0.3em', backgroundColor: '#c953b6'}}
         onPress={() => {
-          setBairro('')
-          setCidade('')
-          setNumero('')
-          setEmail('')
-          setText('')
-          setComp('')
-          setUF('')
-          setRua('')
-          setTCep('')
+          showModal()
+          clearFields()
         }}
       >
         Registrar
       </Button>
+      <Portal>
+        <Modal visible={modalVisible} onDismiss={hideModal}>
+          <Text>asfsjafh</Text>
+        </Modal>
+      </Portal>
     </>
   )
+}
+
+const modalStyle = StyleSheet.create({
+  modal: {
+    backgroundColor: '#FFF',
+    padding: '1.5em',
+    margin: '3em',
+    flex: 1,
+    alignItems: 'center'
+  }
+})
+
+const clearFields = () => {
+  setBairro('')
+  setCidade('')
+  setNumero('')
+  setEmail('')
+  setText('')
+  setComp('')
+  setUF('')
+  setRua('')
+  setTCep('')
 }
